@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GU Knowledge Hub</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: #f4f5f7;
+      color: #333;
+    }
+
+    .header {
+      background: #004b23;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .container {
+      padding: 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .search-box {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .search-box input {
+      flex: 1;
+      padding: 12px;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    .search-box button {
+      padding: 12px 18px;
+      background: #008000;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .search-box button:hover {
+      background: #006400;
+    }
+
+    .filter {
+      margin-bottom: 20px;
+    }
+
+    .filter select {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      color: #006400;
+    }
+
+    .card button {
+      padding: 10px 16px;
+      border: none;
+      background: #004b23;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .card button:hover {
+      background: #002f14;
+    }
+
+    .upload-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #008000;
+      color: white;
+      padding: 16px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .upload-btn:hover {
+      background: #006400;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 25px;
+      width: 350px;
+      border-radius: 12px;
+    }
+
+    .modal-content h2 {
+      margin-top: 0;
+      color: #004b23;
+    }
+
+    .modal-content input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-bottom: 12px;
+    }
+
+    .modal-content button {
+      width: 100%;
+      padding: 12px;
+      background: #004b23;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .modal-content button:hover {
+      background: #002f14;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">GU Knowledge Hub</div>
+
+  <div class="container">
+    <div class="search-box">
+      <input type="text" id="search" placeholder="Search course materials, videos, guides..." />
+      <button onclick="search()">Search</button>
+    </div>
+
+    <div class="filter">
+      <select id="departmentFilter">
+        <option value="all">All Departments</option>
+        <option value="IT">Information Technology</option>
+        <option value="CS">Computer Science</option>
+        <option value="MIS">Management Info Systems</option>
+      </select>
+    </div>
+
+    <div class="grid" id="materialsContainer">
+      <div class="card" data-dept="IT">
+        <h3>Web Development Basics</h3>
+        <p>HTML, CSS, JavaScript fundamentals.</p>
+        <button onclick="notify()">Download</button>
+      </div>
+
+      <div class="card" data-dept="CS">
+        <h3>Data Structures PDF</h3>
+        <p>Stacks, Queues, Linked Lists, Trees.</p>
+        <button onclick="notify()">Download</button>
+      </div>
+
+      <div class="card" data-dept="MIS">
+        <h3>System Analysis Guide</h3>
+        <p>Process modeling and requirements analysis.</p>
+        <button onclick="notify()">Download</button>
+      </div>
+
+      <div class="card" data-dept="IT">
+        <h3>Database Introduction</h3>
+        <p>SQL basics, ERD diagrams, normalization.</p>
+        <button onclick="notify()">Download</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="upload-btn" onclick="openModal()">+ Upload Material</div>
+
+  <div class="modal" id="uploadModal">
+    <div class="modal-content">
+      <h2>Upload Material</h2>
+      <input type="text" placeholder="Material Title" />
+      <input type="file" />
+      <button onclick="closeModal()">Upload</button>
+    </div>
+  </div>
+
+  <script>
+    function notify() {
+      alert("Your download has started!");
+    }
+
+    function search() {
+      alert("Search is simulated in the demo version.");
+    }
+
+    function openModal() {
+      document.getElementById("uploadModal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("uploadModal").style.display = "none";
+      alert("Upload simulated successfully!");
+    }
+
+    document.getElementById("departmentFilter").addEventListener("change", function () {
+      let dept = this.value;
+      let cards = document.querySelectorAll(".card");
+
+      cards.forEach(card => {
+        card.style.display = (dept === "all" || card.dataset.dept === dept) ? "block" : "none";
+      });
+    });
+  </script>
+
+</body>
+</html>
